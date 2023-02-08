@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Import(RivuletMetaScannerRigistrar.class)
+@Import(RivuletMetaScannerRegistrar.class)
 public @interface RivuletMetaScan {
 
     /**

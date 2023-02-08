@@ -2,23 +2,39 @@ package zly.rivulet.spring.base.scan;
 
 import org.springframework.aop.scope.ScopedProxyFactoryBean;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.context.annotation.AnnotationBeanNameGenerator;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.util.StringUtils;
 import zly.rivulet.spring.base.proxy.RivuletMapperFactoryBean;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class RivuletMapperScanner extends ClassPathBeanDefinitionScanner {
 
     private String rivuletTemplateBeanName;
+    private final Map<String, Set<BeanDefinition>> candidateComponentsMap = new HashMap<>();
+
+    private BeanNameGenerator beanNameGenerator;
 
     public RivuletMapperScanner(BeanDefinitionRegistry registry) {
         super(registry);
+        beanNameGenerator = AnnotationBeanNameGenerator.INSTANCE;
+        this.setBeanNameGenerator(beanNameGenerator);
+    }
+
+    @Override
+    public void setBeanNameGenerator(BeanNameGenerator beanNameGenerator) {
+        this.beanNameGenerator = beanNameGenerator;
+        super.setBeanNameGenerator(beanNameGenerator);
     }
 
     public void setRivuletTemplateBeanName(String rivuletTemplateBeanName) {
@@ -31,7 +47,27 @@ public class RivuletMapperScanner extends ClassPathBeanDefinitionScanner {
     }
 
     @Override
+    public Set<BeanDefinition> findCandidateComponents(String basePackage) {
+        Set<BeanDefinition> candidateComponents = this.candidateComponentsMap.get(basePackage);
+        if (candidateComponents == null) {
+            candidateComponents = super.findCandidateComponents(basePackage);
+            this.candidateComponentsMap.put(basePackage, candidateComponents);
+        }
+        return candidateComponents;
+    }
+
+    @Override
     protected Set<BeanDefinitionHolder> doScan(String... basePackages) {
+        BeanDefinitionRegistry registry = getRegistry();
+        for (String basePackage : basePackages) {
+            Set<BeanDefinition> candidateComponents = this.findCandidateComponents(basePackage);
+            // 每一个@RevuletMapper都不应该被别的东西注册成bean
+            for (BeanDefinition candidateComponent : candidateComponents) {
+                String beanName = beanNameGenerator.generateBeanName(candidateComponent, registry);
+
+                registry.removeBeanDefinition(beanName);
+            }
+        }
         Set<BeanDefinitionHolder> beanDefinitionHolders = super.doScan(basePackages);
         if (beanDefinitionHolders.isEmpty()) {
             // TODO 可能已经被mybatis扫描成bean了，需要抢回来
