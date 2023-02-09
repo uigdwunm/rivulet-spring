@@ -26,7 +26,7 @@ public class RivuletMapperScanner extends ClassPathBeanDefinitionScanner {
     private BeanNameGenerator beanNameGenerator;
 
     public RivuletMapperScanner(BeanDefinitionRegistry registry) {
-        super(registry);
+        super(registry, false);
         beanNameGenerator = AnnotationBeanNameGenerator.INSTANCE;
         this.setBeanNameGenerator(beanNameGenerator);
     }
