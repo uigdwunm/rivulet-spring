@@ -1,5 +1,6 @@
 # rivulet-spring
-## 快速开始（spring）
+[rivulet本体项目](https://github.com/uigdwunm/rivulet)
+## 快速开始（spring接入）
 ### 1、引入包
 >
 >&lt;dependency>\
