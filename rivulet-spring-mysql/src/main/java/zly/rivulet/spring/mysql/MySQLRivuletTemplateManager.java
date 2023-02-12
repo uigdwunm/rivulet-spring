@@ -1,8 +1,11 @@
 package zly.rivulet.spring.mysql;
 
 import zly.rivulet.base.Rivulet;
+import zly.rivulet.base.convertor.ResultConvertor;
+import zly.rivulet.base.convertor.StatementConvertor;
 import zly.rivulet.mysql.MySQLRivuletManager;
 import zly.rivulet.mysql.MySQLRivuletProperties;
+import zly.rivulet.spring.mysql.support.JsonType;
 
 import javax.sql.DataSource;
 
@@ -22,5 +25,10 @@ public class MySQLRivuletTemplateManager extends MySQLRivuletManager {
 
     public DataSource getDataSource() {
         return dataSource;
+    }
+
+    public void supportJsonType(StatementConvertor<JsonType> statementConvertor, ResultConvertor<String, JsonType> resultConvertor) {
+        // 注册json类型的转换器，
+        convertorManager.registerSuperClassConvertor(statementConvertor, resultConvertor);
     }
 }

@@ -1,12 +1,14 @@
 # rivulet-spring
 [rivulet本体项目](https://github.com/uigdwunm/rivulet)
+## 说明文档
+1. [spl语句映射规则](https://github.com/uigdwunm/rivulet/blob/main/docs/cn/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/sql%E8%AF%AD%E5%8F%A5%E6%98%A0%E5%B0%84%E8%A7%84%E5%88%99.md)
 ## 快速开始（spring接入）
 ### 1、引入包
 >
 >&lt;dependency>\
 >&ensp;&ensp;&ensp;&ensp;&lt;groupId>io.github.uigdwunm&lt;/groupId>\
 >&ensp;&ensp;&ensp;&ensp;&lt;artifactId>rivulet-spring-mysql&lt;/artifactId>\
->&ensp;&ensp;&ensp;&ensp;&lt;version>1.0-SNAPSHOT&lt;/version>\
+>&ensp;&ensp;&ensp;&ensp;&lt;version>0.0.2-PREVIEW&lt;/version>\
 >&lt;/dependency>
 
 ### 2、配置Bean
