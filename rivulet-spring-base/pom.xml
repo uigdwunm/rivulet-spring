@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.uigdwunm</groupId>
         <artifactId>rivulet-spring</artifactId>
-        <version>0.0.2-PREVIEW</version>
+        <version>0.0.6-PREVIEW</version>
     </parent>
 
     <artifactId>rivulet-spring-base</artifactId>
@@ -15,23 +15,7 @@
         <dependency>
             <groupId>io.github.uigdwunm</groupId>
             <artifactId>rivulet-base</artifactId>
-            <version>0.0.2-PREVIEW</version>
+            <version>0.0.6-PREVIEW</version>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
