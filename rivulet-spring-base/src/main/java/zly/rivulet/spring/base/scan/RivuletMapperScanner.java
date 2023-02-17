@@ -27,7 +27,7 @@ public class RivuletMapperScanner extends ClassPathBeanDefinitionScanner {
 
     public RivuletMapperScanner(BeanDefinitionRegistry registry) {
         super(registry, false);
-        beanNameGenerator = AnnotationBeanNameGenerator.INSTANCE;
+        beanNameGenerator = new AnnotationBeanNameGenerator();
         this.setBeanNameGenerator(beanNameGenerator);
     }
 
@@ -57,20 +57,21 @@ public class RivuletMapperScanner extends ClassPathBeanDefinitionScanner {
     }
 
     @Override
-    protected Set<BeanDefinitionHolder> doScan(String... basePackages) {
+    protected boolean checkCandidate(String beanName, BeanDefinition beanDefinition) throws IllegalStateException {
         BeanDefinitionRegistry registry = getRegistry();
-        for (String basePackage : basePackages) {
-            Set<BeanDefinition> candidateComponents = this.findCandidateComponents(basePackage);
-            // 每一个@RevuletMapper都不应该被别的东西注册成bean
-            for (BeanDefinition candidateComponent : candidateComponents) {
-                String beanName = beanNameGenerator.generateBeanName(candidateComponent, registry);
-
-                registry.removeBeanDefinition(beanName);
-            }
+        if (registry.containsBeanDefinition(beanName)) {
+            // 如果包含，则删除
+            // 任何被注册了RivuletMapper的Bean都不应该被其他地方处理
+            registry.removeBeanDefinition(beanName);
         }
+        // TODO 这样可能不太好
+        return true;
+    }
+
+    @Override
+    protected Set<BeanDefinitionHolder> doScan(String... basePackages) {
         Set<BeanDefinitionHolder> beanDefinitionHolders = super.doScan(basePackages);
         if (beanDefinitionHolders.isEmpty()) {
-            // TODO 可能已经被mybatis扫描成bean了，需要抢回来
             return beanDefinitionHolders;
         }
         for (BeanDefinitionHolder holder : beanDefinitionHolders) {

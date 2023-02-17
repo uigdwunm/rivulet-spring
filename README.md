@@ -2,6 +2,7 @@
 [rivulet本体项目](https://github.com/uigdwunm/rivulet)
 ## 说明文档
 1. [spl语句映射规则](https://github.com/uigdwunm/rivulet/blob/main/docs/cn/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/sql%E8%AF%AD%E5%8F%A5%E6%98%A0%E5%B0%84%E8%A7%84%E5%88%99.md)
+2. [扩展点](https://github.com/uigdwunm/rivulet/blob/main/docs/cn/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/%E6%89%A9%E5%B1%95%E7%82%B9.md)
 ## 快速开始（spring接入）
 ### 1、引入包
 >
