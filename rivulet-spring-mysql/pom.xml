@@ -6,7 +6,7 @@
     <parent>
         <groupId>io.github.uigdwunm</groupId>
         <artifactId>rivulet-spring</artifactId>
-        <version>0.0.9-PREVIEW</version>
+        <version>0.0.10-PREVIEW</version>
     </parent>
 
     <artifactId>rivulet-spring-mysql</artifactId>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>io.github.uigdwunm</groupId>
             <artifactId>rivulet-mysql</artifactId>
-            <version>0.0.9-PREVIEW</version>
+            <version>0.0.10-PREVIEW</version>
         </dependency>
     </dependencies>
 

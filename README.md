@@ -9,7 +9,7 @@
 >&lt;dependency>\
 >&ensp;&ensp;&ensp;&ensp;&lt;groupId>io.github.uigdwunm&lt;/groupId>\
 >&ensp;&ensp;&ensp;&ensp;&lt;artifactId>rivulet-spring-mysql&lt;/artifactId>\
->&ensp;&ensp;&ensp;&ensp;&lt;version>0.0.9-PREVIEW&lt;/version>\
+>&ensp;&ensp;&ensp;&ensp;&lt;version>0.0.10-PREVIEW&lt;/version>\
 >&lt;/dependency>
 
 ### 2、配置Bean
